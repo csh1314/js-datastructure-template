@@ -9,3 +9,8 @@ const scm = (x, y) => {
   return (x * y)/gcd(x,y)
 }
 
+export {
+  gcd,
+  scm
+}
+

@@ -1,5 +1,5 @@
 // 并查集
-class DisjointSet{
+export default class DisjointSet{
   constructor(n){
       this.parent = new Array(n).fill(0).map((_,idx) => idx)
       // 以i为根结点的子集大小

@@ -1,5 +1,5 @@
 // 优先队列
-class PriorityQueue {
+export default class PriorityQueue {
   // 默认最大堆
   constructor(
     compare = (a, b) => a > b 

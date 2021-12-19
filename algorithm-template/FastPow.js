@@ -10,3 +10,7 @@ const pow = (x, y, mod) => {
   }
   return ans
 }
+
+export {
+  pow
+}

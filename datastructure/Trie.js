@@ -1,5 +1,5 @@
 // 前缀树
-class Trie{
+export default class Trie{
   constructor(){
     this.root = {}
   }

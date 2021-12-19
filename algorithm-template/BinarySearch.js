@@ -24,3 +24,8 @@ const lower_bound = (nums, target) => {
   }
   return l
 }
+
+export {
+  upper_bound,
+  lower_bound
+}
