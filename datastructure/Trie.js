@@ -7,7 +7,7 @@ export default class Trie{
   insert(word){
     let node = this.root
     for(let ch of word){
-      if(!node[ch]) node[ch] = {}
+      node[ch] = node[ch] || {}
       node = node[ch]
     }
     node.isEnd = true
@@ -16,7 +16,9 @@ export default class Trie{
   searchPrefix(prefix){
     let node = this.root
     for(let ch of prefix){
-      if(!node[ch]) return false
+      if(!node[ch]){
+        return null
+      }
       node = node[ch]
     }
     return node
