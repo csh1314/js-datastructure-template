@@ -17,7 +17,7 @@ export class Queue {
     this.insert.push(value)
   }
   pop(){
-    if(this.isEmpty()) return -1
+    if(this.isEmpty()) return undefined
     if(this.delete.length){
       return this.delete.pop()
     }
@@ -27,7 +27,7 @@ export class Queue {
     return this.delete.pop()
   }
   peek(){
-    if(this.isEmpty()) return -1
+    if(this.isEmpty()) return undefined
     if(this.delete.length){
       return this.delete[this.delete.length-1]
     }
