@@ -1,5 +1,5 @@
 // 优先队列
-export default class PriorityQueue {
+export class PriorityQueue {
   // 默认最大堆
   constructor(
     compare = (a, b) => a > b 
@@ -13,12 +13,12 @@ export default class PriorityQueue {
     return this.size === 0 ? null : this.data[0] 
   }
 
-  offer(val) {
+  push(val) {
     this.data.push(val)
     this._shifUp(this.size++)
   }
 
-  poll() {
+  pop() {
     if(this.size === 0) { return null }
     this._swap(0, --this.size)
     this._shifDown(0)
