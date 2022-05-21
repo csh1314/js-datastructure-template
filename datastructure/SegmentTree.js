@@ -3,23 +3,25 @@ class SegmentTree {
   constructor(start, end) {
     this.root = new Node(start, end)
   }
-  update(start, end) {
-    this.updateNode(this.root, start, end)
+  update(start, end, delta) {
+    this.updateNode(this.root, start, end, delta)
   }
-  updateNode(node, start, end) {
+  updateNode(node, start, end, delta) {
     if (!node) {
       return
     }
     if (start > node.end || end < node.start) {
       return
     } else if (start <= node.start && end >= node.end) {
-      node.val = node.end - node.start + 1
+      node.val += delta
+      node.isLazy = true
+      node.lazyValue += delta
       return
     } else {
-      this._pushdown(node);
-      this.updateNode(node.left, start, end);
-      this.updateNode(node.right, start, end);
-      this._pushup(node);
+      this._pushdown(node)
+      this.updateNode(node.left, start, end, delta)
+      this.updateNode(node.right, start, end, delta)
+      this._pushup(node)
     }
   }
   query(start, end) {
@@ -49,9 +51,15 @@ class SegmentTree {
     if (!node.right) {
       node.right = new Node(mid + 1, node.end)
     }
-    if (node.val === (node.end - node.start + 1)) {
-      node.left.val = mid - node.start + 1
-      node.right.val = node.end - mid
+    if (node.isLazy) {
+      node.left.isLazy = true
+      node.right.isLazy = true
+      node.left.lazyValue += node.lazyValue
+      node.right.lazyValue += node.lazyValue
+      node.left.val += node.lazyValue
+      node.right.val += node.lazyValue
+      node.isLazy = false
+      node.lazyValue = 0
     }
   }
   _pushup(node) {
@@ -66,6 +74,8 @@ class Node {
     this.end = end
     this.left = null
     this.right = null
+    this.isLazy = false
+    this.lazyValue = 0
   }
 }
 
