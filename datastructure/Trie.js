@@ -1,5 +1,5 @@
 // 前缀树
-export default class Trie{
+class Trie{
   constructor(){
     this.root = {}
   }
@@ -33,3 +33,5 @@ export default class Trie{
     return this.searchPrefix(prefix)
   }
 }
+
+export default Trie

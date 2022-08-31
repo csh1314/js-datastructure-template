@@ -1,5 +1,5 @@
 // 并查集
-export default class DisjointSet{
+class DisjointSet{
   constructor(n){
       this.parent = new Array(n).fill(0).map((_,idx) => idx)
       // 以i为根结点的子集大小
@@ -32,3 +32,5 @@ export default class DisjointSet{
       return this.findParent(a) === this.findParent(b)
   } 
 }
+
+export default DisjointSet

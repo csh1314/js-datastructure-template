@@ -1,5 +1,5 @@
 // 优先队列
-export class PriorityQueue {
+class PriorityQueue {
   // 默认最大堆
   constructor(
     compare = (a, b) => a > b 
@@ -60,3 +60,5 @@ export class PriorityQueue {
     [this.data[a], this.data[b]] = [this.data[b], this.data[a]]
   }
 }
+
+export default PriorityQueue

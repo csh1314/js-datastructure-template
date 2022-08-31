@@ -8,7 +8,7 @@
  * 使用栈来实现一个队列,使其 push/pop/peek 的时间复杂度都为 O(1)
  * 思路: 一个作插入栈, 一个作删除栈
  */
-export class Queue {
+class Queue {
   constructor(){
     this.insert = []
     this.delete = []
@@ -37,3 +37,5 @@ export class Queue {
     return !this.insert.length && !this.delete.length
   }
 }
+
+export default Queue
