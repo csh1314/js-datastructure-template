@@ -2,7 +2,7 @@
 const upper_bound = (nums, target) => {
   let l = 0, r = nums.length-1
   while(l < r){
-    let m = (l+r) >> 1
+    let m = Math.floor((l+r)/2)
     if(nums[m] > target){
       r = m
     }else{
@@ -15,7 +15,7 @@ const upper_bound = (nums, target) => {
 // 在nums中查找第一个 >= target的index
 const lower_bound = (nums, target) => {
   while(l < r){
-    let m = (l+r) >> 1
+    let m = Math.floor((l+r)/2)
     if(nums[m] >= target){
       r = m
     }else{
