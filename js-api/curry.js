@@ -1,9 +1,12 @@
 function curry(fn) {
+  const fnLen = fn.length
   return function curried(...args) {
-    if (args.length >= fn.length) {
+    if (args.length >= fnLen) {
       return fn.apply(this, args)
     }
-    return curried.bind(this, ...args)
+    return function(...restArgs) {
+      return curried.apply(this, args.concat(restArgs))
+    }
   }
 }
 
@@ -42,3 +45,8 @@ const enhanceFetchSomeDataV2 = wrappedCommonPayloadV2(originFetchSomeData)({
 
 enhanceFetchSomeDataV1({ payload: 'xxxxx 业务传入' })
 enhanceFetchSomeDataV2({ payload: 'xxxxx 业务传入' })
+
+
+const add = (a, b, c, d, e) => a + b + c + d + e
+const curriedAdd = curry(add)
+console.log(curriedAdd(1, 1)(1)(1)(1))
