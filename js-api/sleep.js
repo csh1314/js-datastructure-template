@@ -2,6 +2,7 @@ class Person {
   isRunning = false
 
   queue = []
+
   async triggerTask() {
     if (this.isRunning) return
     this.isRunning = true
@@ -31,7 +32,32 @@ class Person {
   }
 }
 
-const person = new Person()
+class PersonV2 {
+  queue = Promise.resolve()
+
+  addTask(task) {
+    this.queue = this.queue.then(task)
+  }
+
+  eat(something) {
+    const task = () => {
+      console.log(Date.now(), '----', something)
+    }
+    this.addTask(task)
+    return this
+  }
+  sleep(time) {
+    const task = async () => {
+      await new Promise(resolve => {
+        setTimeout(resolve, time)
+      })
+    }
+    this.addTask(task)
+    return this
+  }
+}
+
+const person = new PersonV2()
 
 person
   .eat('breakfast')
