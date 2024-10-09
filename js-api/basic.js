@@ -70,3 +70,15 @@ Function.prototype._bind2 = function (context, ...args1) {
     return fn.apply(context, args1.concat(args2))
   }
 }
+
+
+function instanceOf(leftObj, rightObj) {
+  let proto = Object.getPrototypeOf(leftObj)
+  while(proto) {
+    if (proto === rightObj.prototype) {
+      return true
+    }
+    proto = Object.getPrototypeOf(proto)
+  }
+  return false
+}
