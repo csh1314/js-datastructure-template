@@ -82,3 +82,12 @@ function instanceOf(leftObj, rightObj) {
   }
   return false
 }
+
+function _new(constructor, ...args) {
+  const obj = {}
+  obj.__proto__ = constructor.prototype
+  const result = constructor.apply(obj, args)
+  return typeof result === 'object' && result !== null 
+    ? result 
+    : obj
+}
