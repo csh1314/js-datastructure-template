@@ -56,6 +56,24 @@ function compose(middleware) {
     return dispatch(0)
   }
 }
+function composeSlim(middlewares) {
+  if (
+    !Array.isArray(middlewares) 
+    || middlewares.some(fn => typeof fn !== 'function')
+  ) {
+    throw new Error('Middlewares must be a function list')
+  }
+
+  const dispatch = i => async (ctx, next) => {
+    const fn = i === middlewares.length 
+      ? next 
+      : middlewares[i]
+    if (!fn) return
+    return await fn(ctx, dispatch(i+1))
+  }
+
+  return dispatch(0)()
+}
 
 
 // test code
@@ -85,6 +103,15 @@ const app = {
     }
     return handleRequest
   },
+
+  runBySlim() {
+    const fn = composeSlim(this.middleware)
+    const handleRequest = (req, res) => {
+      const ctx = this.createContext(req, res)
+      return this.doRequest(ctx, fn)
+    }
+    return handleRequest
+  }
 }
 
 app.use(
